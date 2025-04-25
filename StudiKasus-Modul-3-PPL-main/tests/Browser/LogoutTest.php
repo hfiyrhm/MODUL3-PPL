@@ -11,14 +11,14 @@ class LogoutTest extends DuskTestCase
     /**
      * A Dusk test example.
      */
-    public function testExample(): void
+    public function LogoutTest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Logout')
-                    ->clickLink('Log out')
-                    ->assertPathIs('/')
-                    ->assertSee('Login');
+            $browser->visit('/') 
+                    ->assertSee('Logout') // Mengarahkan browser ke halaman utama aplikasi (rute '/')
+                    ->clickLink('Log out') // Mengklik tautan dengan teks 'Log out' untuk keluar dari aplikasi
+                    ->assertPathIs('/') // Memastikan browser dialihkan ke rute '/' setelah keluar
+                    ->assertSee('Login'); // Memastikan teks 'Login' ada di halaman utama untuk memverifikasi bahwa pengguna telah keluar
         });
     }
 }
