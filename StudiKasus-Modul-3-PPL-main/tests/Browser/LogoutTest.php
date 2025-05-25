@@ -6,19 +6,24 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LogoutTest extends DuskTestCase
+class LogOutTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
      */
-    public function LogoutTest(): void
+    public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/') 
-                    ->assertSee('Logout') // Mengarahkan browser ke halaman utama aplikasi (rute '/')
-                    ->clickLink('Log out') // Mengklik tautan dengan teks 'Log out' untuk keluar dari aplikasi
-                    ->assertPathIs('/') // Memastikan browser dialihkan ke rute '/' setelah keluar
-                    ->assertSee('Login'); // Memastikan teks 'Login' ada di halaman utama untuk memverifikasi bahwa pengguna telah keluar
+            $browser->visit('http://127.0.0.1:8000/')
+                    ->clickLink('Log in')
+                    ->assertPathIs('/login')
+                    ->type('email', 'fiyya@gmail.com')
+                    ->type('password', 'password')
+                    ->press('LOG IN')
+                    ->assertPathIs('/dashboard')
+                    ->click('#click-dropdown')
+                    ->clickLink('Log Out')
+                    ->assertPathIs('/');
         });
     }
 }

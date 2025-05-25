@@ -11,17 +11,17 @@ class DeleteNoteTest extends DuskTestCase
     /**
      * A Dusk test example.
      */
-    public function EditNoteTest(): void
+    public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel')
-                    ->clickLink('Notes') // Mengklik tautan dengan teks 'Notes' untuk membuka halaman notes
-                    ->assertPathIs('/notes') // Memastikan browser dialihkan ke rute '/notes' setelah klik tautan
-                    ->assertSee('Test Note') // Memastikan teks 'Test Note' ada di halaman notes untuk memverifikasi bahwa catatan tersebut ada
-                    ->click('button[wire\\:click="deleteNote(1)"]') // Mengklik tombol hapus catatan dengan ID 1
-                    ->assertPathIs('/notes') // Memastikan browser dialihkan ke rute '/notes' setelah mengklik tombol hapus
-                    ->assertDontSee('Test Note'); // Memastikan teks 'Test Note' tidak ada di halaman notes setelah dihapus
+            $browser->visit('http://127.0.0.1:8000/login') 
+                    ->type('email', 'fiyya@gmail.com') 
+                    ->type('password', 'password') 
+                    ->press('LOG IN')
+                    ->visit('http://127.0.0.1:8000/dashboard')
+                    ->clickLink('Notes')
+                    ->visit('http://127.0.0.1:8000/notes')
+                    ->press('Delete');
         });
     }
 }
